@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +8,12 @@
   <title>Respuesta</title>
 </head>
 <body>
-  <!-- Bean de sesión con los datos del estudiante -->
   <jsp:useBean id="student" scope="session" class="com.laboratoriojavaserverpages.beans.StudentBean" />
   <jsp:setProperty name="student" property="*" />
 
-  <!-- "Reloj" sin JavaScript:
-       Usamos Calendar para obtener la hora actual (HOUR_OF_DAY = 11). -->
-  <jsp:useBean id="clock" class="java.util.GregorianCalendar" scope="request" />
-  <c:set var="hour" value="${clock.get(11)}" />
+  <jsp:useBean id="clock" class="java.util.Date" scope="request" />
+  <fmt:formatDate value="${clock}" pattern="H" var="hourStr" />
+  <c:set var="hour" value="${hourStr}" />
 
   <c:choose>
     <c:when test="${hour lt 12}"><h2>Buenos días</h2></c:when>
