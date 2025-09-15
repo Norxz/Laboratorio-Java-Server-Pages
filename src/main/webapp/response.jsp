@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -7,12 +7,10 @@
   <title>Respuesta</title>
 </head>
 <body>
-  <!-- Bean de sesión con los datos del estudiante -->
   <jsp:useBean id="student" scope="session" class="com.laboratoriojavaserverpages.beans.StudentBean" />
   <jsp:setProperty name="student" property="*" />
 
-  <!-- "Reloj" sin JavaScript:
-       Usamos Calendar para obtener la hora actual (HOUR_OF_DAY = 11). -->
+  <!-- Reloj sin JS: Calendar -->
   <jsp:useBean id="clock" class="java.util.GregorianCalendar" scope="request" />
   <c:set var="hour" value="${clock.get(11)}" />
 
@@ -23,6 +21,9 @@
   </c:choose>
 
   <h1>Hola, <c:out value="${student.name}" />!</h1>
+
+  <!-- Debug rápido para verificar que llegan los parámetros -->
+  <p style="font-size:0.9em;color:#666">Debug: name=<c:out value="${param.name}"/>, birthDate=<c:out value="${param.birthDate}"/></p>
 
   <c:choose>
     <c:when test="${student.age ge 0}">
